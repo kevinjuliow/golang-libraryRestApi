@@ -17,8 +17,9 @@ func LoadEnv() {
 	}
 }
 
+var DB *gorm.DB
+
 func Dbconnection() {
-	var Book models.Book
 
 	LoadEnv()
 
@@ -32,5 +33,7 @@ func Dbconnection() {
 		log.Fatal("Failed to connect to database : " + err.Error())
 	}
 
-	db.AutoMigrate(&Book)
+	db.AutoMigrate(&models.Book{})
+
+	DB = db
 }
